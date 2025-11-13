@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record model="ir.ui.view" id="course_form_view">
+        <field name="name">course.form</field>
+        <field name="model">openacademy.course</field>
+        <field name="arch" type="xml">
+            <form string="Course">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="responsible_id" />
+                    </group>
+                    <notebook>
+                        <page string="Description">
+                            <field name="description"/>
+                        </page>
+                        <page string="Sessions">
+                            <field name="session_ids">
+                                <list string="Sessions">
+                                    <field name="name" />
+                                    <field name="instructor_id" />
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="course_search_view" model="ir.ui.view">
+        <field name="name">course.search</field>
+        <field name="model">openacademy.course</field>
+        <field name="arch" type="xml">
+            <search string="Search Courses">
+                <field name="name" />
+                <field name="description" />
+            </search>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="session_form_view">
+        <field name="name">session.form</field>
+        <field name="model">openacademy.session</field>
+        <field name="arch" type="xml">
+            <form string="Session">
+                <sheet>
+                    <group>
+                        <fieldn name="name" />
+                        <fieldn name="instructor_id" />
+                        <fieldn name="course_id" />
+                    </group>
+                    <group>
+                        <field name="start_date"/>
+                        <field name="duration"/>
+                        <field name="seats"/>
+                    </group>
+                    <notebook>
+                        <page name="Attendees">
+                            <fieldn name="attendee_ids" />
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="session_list_view">
+        <field name="name">session.list</field>
+        <field name="model">openacademy.session</field>
+        <field name="arch" type="xml">
+            <list string="Sessions">
+                <field name="name"/>
+                <field name="start_date"/>
+                <field name="duration"/>
+                <field name="seats"/>
+            </list>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="action_list_sessions">
+        <field name="name">Sessions</field>
+        <field name="res_model">openacademy.session</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <record model="ir.ui.view" id="course_list_view">
+        <field name="name">course.list</field>
+        <field name="model">openacademy.course</field>
+        <field name="arch" type="xml">
+            <list string="Courses">
+                <field name="name"/>
+                </list>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="action_list_courses">
+        <field name="name">Courses</field>
+        <field name="res_model">openacademy.course</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Crea tu primer curso!</p>
+        </field>
+    </record>
+
+    <record id="partner_instructor_form_view" model="ir.ui.view">
+        <field name="name">partner.instructor.form</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"></field>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='category_id']" position="after">
+                <field name="instructor" />
+            </xpath>
+            <notebook position="inside">
+                <page string="Sessions" name="sessions">
+                    <field name="session_ids" />
+                </page>
+            </notebook>
+        </field>
+    </record>
+
+    <menuitem id="menu_main_openacademy" name="Open Academy"/>
+    <menuitem id="menu_courses"  parent="menu_main_openacademy" name="Courses" action="action_list_courses"/>
+    <menuitem id="menu_sessions" parent="menu_main_openacademy" name="Sessions" action="action_list_sessions"/>
+</odoo>
