@@ -1,4 +1,4 @@
-from odoo import models, fields
+from odoo import _, api, fields, models
 from odoo.exceptions import ValidationError
 
 class Session(models.Model):

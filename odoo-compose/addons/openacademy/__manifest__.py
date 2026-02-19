@@ -20,7 +20,6 @@
         'security/security.xml',
         'security/ir.model.access.csv',
         'views/views.xml',
-        'views/board_views.xml',
         'reports/reports.xml',
 	# 'vistas/matches.xml',
 	# 'vistas/maps.xml',
